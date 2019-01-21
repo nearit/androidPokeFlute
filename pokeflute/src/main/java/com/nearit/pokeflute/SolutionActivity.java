@@ -81,7 +81,7 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
 
         drawOverUtility = new DrawOverUtility(this, this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (drawOverUtility.canDrawOver()) {
                 drawnOverInstructions = true;
                 init();
