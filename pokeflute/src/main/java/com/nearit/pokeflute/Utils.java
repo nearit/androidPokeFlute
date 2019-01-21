@@ -1,7 +1,10 @@
 package com.nearit.pokeflute;
 
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Build;
 
 import java.util.Arrays;
@@ -114,6 +117,29 @@ class Utils {
             }
         }
         return potentiallyBlocked;
+    }
+
+    /**
+     * Checks if one of the known App Blockers is installed.
+     *
+     * @param context a valid Context
+     * @return 'true' if an app blocker is installed, 'false' otherwise
+     */
+    public static boolean checkForAppBlockersExplicitly(Context context) {
+        boolean installed = false;
+        for (Intent intent : POWERMANAGER_INTENTS) {
+            if (canStartActivity(context, intent)) installed = true;
+        }
+        return installed;
+    }
+
+    private static boolean canStartActivity(Context context, Intent intent) {
+        boolean intentResolved = false;
+        List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        if (list.size() > 0) {
+            intentResolved = true;
+        }
+        return intentResolved;
     }
 
     private static boolean inWhiteList() {
