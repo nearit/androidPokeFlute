@@ -45,6 +45,10 @@ class Utils {
             MANUFACTURER_LENOVO
     );
 
+    /**
+     * Despite manufacturer tends to add some sort of App Blocker / Battery Optimizer, these devices
+     * are not affected because Android One or Nexus phones.
+     */
     private static final List<String> WHITELISTED_DEVICES = Arrays.asList(
             "tissot_sprout",    // Xiaomi A1
             "jasmine_sprout",   // Xiaomi A2
