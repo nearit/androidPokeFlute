@@ -67,9 +67,12 @@ class Utils {
     static final Intent ASUS_INTENT = new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(android.net.Uri.parse("mobilemanager://function/entry/AutoStart"));
     static final Intent XIAOMI_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
     static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3"));
-    static final Intent SAMSUNG_INTENT = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity"));
-    static final Intent HTC_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
+    static final Intent SAMSUNG_INTENT_7_AND_LATER = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity"));
+    static final Intent SAMSUNG_INTENT_LOLLIPOP = new Intent().setComponent(new ComponentName("com.samsung.android.sm", "com.samsung.android.sm.ui.battery.BatteryActivity"));
+    static final Intent HTC_BOOST_APP_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
     static final Intent LENOVO_INTENT = new Intent().setComponent(new ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.PowerSettingActivity"));
+    static final Intent ONEPLUS_BATTERY_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeSwitchActivity"));
+    static final Intent ONEPLUS_DEEP_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeAppListActivity"));
 
     public static final List<Intent> POWERMANAGER_INTENTS = Arrays.asList(
             XIAOMI_INTENT,
@@ -83,9 +86,12 @@ class Utils {
             VIVO_INTENT_3,
             ASUS_INTENT,
             NOKIA_INTENT,
-            SAMSUNG_INTENT,
-            HTC_INTENT
-            LENOVO_INTENT
+            SAMSUNG_INTENT_7_AND_LATER,
+            SAMSUNG_INTENT_LOLLIPOP,
+            HTC_BOOST_APP_INTENT,
+            LENOVO_INTENT,
+            ONEPLUS_BATTERY_OPTIMIZATION_INTENT,
+            ONEPLUS_DEEP_OPTIMIZATION_INTENT
     );
 
 
