@@ -27,6 +27,7 @@ class Utils {
     static final String MANUFACTURER_ASUS = "asus";
     static final String MANUFACTURER_VIVO = "vivo";
     static final String MANUFACTURER_ELEPHONE = "elephone";
+    static final String MANUFACTURER_LENOVO = "lenovo";
 
     private static final List<String> BLOCKING_MANUFACTURERS = Arrays.asList(
             MANUFACTURER_NOKIA,
@@ -40,7 +41,8 @@ class Utils {
             MANUFACTURER_HTC,
             MANUFACTURER_ASUS,
             MANUFACTURER_VIVO,
-            MANUFACTURER_ELEPHONE
+            MANUFACTURER_ELEPHONE,
+            MANUFACTURER_LENOVO
     );
 
     private static final List<String> WHITELISTED_DEVICES = Arrays.asList(
@@ -67,6 +69,7 @@ class Utils {
     static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3"));
     static final Intent SAMSUNG_INTENT = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity"));
     static final Intent HTC_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
+    static final Intent LENOVO_INTENT = new Intent().setComponent(new ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.PowerSettingActivity"));
 
     public static final List<Intent> POWERMANAGER_INTENTS = Arrays.asList(
             XIAOMI_INTENT,
@@ -82,6 +85,7 @@ class Utils {
             NOKIA_INTENT,
             SAMSUNG_INTENT,
             HTC_INTENT
+            LENOVO_INTENT
     );
 
 
