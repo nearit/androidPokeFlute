@@ -102,11 +102,11 @@ class Utils {
     /**
      * Checks if a power optimiser could be blocking/limiting the app.
      *
-     * @return 'true' if an app blocker is installed, 'false' otherwise
+     * @return 'true' if the manufacturer is known for adopting app blockers, 'false' otherwise
      */
     public static boolean isAppPotentiallyBlockedByManufacturer() {
         boolean potentiallyBlocked = false;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             for (String manufacturer : BLOCKING_MANUFACTURERS) {
                 if (Build.MANUFACTURER.toLowerCase().contains(manufacturer) && !inWhiteList()) {
                     potentiallyBlocked = oppoNougatOrRecent() && sonyLollipopOrRecent();
