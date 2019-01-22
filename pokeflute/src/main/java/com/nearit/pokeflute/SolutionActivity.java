@@ -9,6 +9,7 @@ import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -92,6 +93,10 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         solutionText = findViewById(R.id.solutionText);
         fixItButton = findViewById(R.id.goFixIt);
         advancedSolution = findViewById(R.id.advancedSolution);
+
+        if (dialogIntroMessage != null) {
+            dialogIntroMessage.setText(Html.fromHtml(getStringRes(R.string.pf_default_intro_message)));
+        }
 
         showManufacturerSpecificSolution();
     }
