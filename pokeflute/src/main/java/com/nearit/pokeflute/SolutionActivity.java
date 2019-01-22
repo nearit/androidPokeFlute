@@ -216,6 +216,7 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         }
         if (advancedSolution != null) {
             advancedSolution.show();
+            advancedSolution.collapse();
             advancedSolution.setSolution(R.string.pf_nokia_advanced);
             advancedSolution.setHeader(R.string.pf_advanced_header);
         }
