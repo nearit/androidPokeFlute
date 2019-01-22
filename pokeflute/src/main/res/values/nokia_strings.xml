@@ -3,7 +3,7 @@
     <string name="pf_nokia_intro_message"><p>Your phone could be blocking this app.</p></string>
     <string name="pf_nokia_default">
         <![CDATA[
-            <p>Currently there is no known solution for your phone.</p>
+            <p>Currently there is no easy solution for your phone.</p>
             <p>Please, consider <a href="https://www.nokia.com/phones/en_int/support#contact-us">contacting the manufacturer</a></p>
         ]]>
     </string>
