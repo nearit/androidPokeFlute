@@ -31,7 +31,6 @@
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingRight="20dp"
-        android:text="@string/pf_default_intro_message"
         tools:text="Your phone could be blocking this app." />
 
     <org.sufficientlysecure.htmltextview.HtmlTextView
