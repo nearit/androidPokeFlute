@@ -293,9 +293,9 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         HtmlTextView batterySolution = findViewById(R.id.xiaomiBatteryUsageSolution);
         if (canStartActivity(this, XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT)) {
             if (!canDrawOver || drawPermissionCouldBeDenied) {
-                batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction_on_screen));
-            } else {
                 batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction));
+            } else {
+                batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction_on_screen));
             }
         } else {
             batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction_on_screen_from_settings));
@@ -317,9 +317,9 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         HtmlTextView autoRunSolution = findViewById(R.id.xiaomiAutoRunSolution);
         if (canStartActivity(this, XIAOMI_AUTOSTART_INTENT) || canStartActivity(this, XIAOMI_AUTOSTART_INTENT_2)) {
             if (!canDrawOver || drawPermissionCouldBeDenied) {
-                autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun_on_screen));
-            } else {
                 autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun));
+            } else {
+                autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun_on_screen));
             }
         } else {
             autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun_on_screen_from_settings));
@@ -341,9 +341,9 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         HtmlTextView internetDisablerSolution = findViewById(R.id.xiaomiInternetDisablerSolution);
         if (canStartActivity(this, XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT)) {
             if (!canDrawOver || drawPermissionCouldBeDenied) {
-                internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler_on_screen));
-            } else {
                 internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler));
+            } else {
+                internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler_on_screen));
             }
         } else {
             internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler_on_screen_from_settings));
