@@ -5,9 +5,7 @@ import android.graphics.Point;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -15,6 +13,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
+
+import static com.nearit.pokeflute.Utils.preJellyBean;
 
 /**
  * @author Federico Boschini
@@ -44,27 +44,20 @@ public class OverlayInstructions extends RelativeLayout {
     }
 
     private void init() {
-        inflate(context, R.layout.layout_screen_overlay_instructions, this);
+        inflate(context, R.layout.pf_layout_screen_overlay_instructions, this);
         instructions = findViewById(R.id.overlaySolutionText);
         container = findViewById(R.id.overlayMainContainer);
-
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(OverlayInstructions.class.getSimpleName(), "pppp");
-            }
-        });
     }
 
     public void setInstructions(@NonNull String text) {
         instructions.setHtml(text);
     }
 
-    public void animateToBottom() {
+    public void animateFromBottom() {
         container.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                if (preJellyBean()) {
                     container.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
                     container.getViewTreeObserver().removeOnGlobalLayoutListener(this);

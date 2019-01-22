@@ -7,6 +7,6 @@
 
     <application>
         <activity android:name=".SolutionActivity"
-            android:theme="@style/DialogActivity"/>
+            android:theme="@style/PF_DialogActivity"/>
     </application>
 </manifest>

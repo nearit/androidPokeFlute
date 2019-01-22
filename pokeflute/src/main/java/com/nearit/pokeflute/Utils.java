@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @author Federico Boschini
  */
-class Utils {
+public class Utils {
 
     /**
      * Manufacturers known for using app blockers / power managers.
@@ -56,8 +56,7 @@ class Utils {
             "tissot_sprout",    // Xiaomi A1
             "jasmine_sprout",   // Xiaomi A2
             "daisy_sprout",     // Xiaomi A2 Lite
-            "angler",           // Huawei Nexus 6P
-            "toro"              // Samsung Galaxy Nexus
+            "angler"            // Huawei Nexus 6P
     );
 
     /**
@@ -72,17 +71,24 @@ class Utils {
     static final Intent VIVO_INTENT_2 = new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager"));
     static final Intent VIVO_INTENT_3 = new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
     static final Intent ASUS_INTENT = new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(android.net.Uri.parse("mobilemanager://function/entry/AutoStart"));
-    static final Intent XIAOMI_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
-    static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3"));
+    static final Intent XIAOMI_AUTOSTART_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
+    static final Intent XIAOMI_AUTOSTART_INTENT_2 = new Intent("miui.intent.action.OP_AUTO_START").addCategory(Intent.CATEGORY_DEFAULT);
+    static final Intent XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT = new Intent("miui.intent.action.POWER_HIDE_MODE_APP_LIST").addCategory(Intent.CATEGORY_DEFAULT);
+    static final Intent XIAOMI_INTERNET_DISABLER_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.powercenter.PowerSettings"));
     static final Intent SAMSUNG_INTENT_7_AND_LATER = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity"));
     static final Intent SAMSUNG_INTENT_LOLLIPOP = new Intent().setComponent(new ComponentName("com.samsung.android.sm", "com.samsung.android.sm.ui.battery.BatteryActivity"));
-    static final Intent HTC_BOOST_APP_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
     static final Intent LENOVO_INTENT = new Intent().setComponent(new ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.PowerSettingActivity"));
     static final Intent ONEPLUS_BATTERY_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeSwitchActivity"));
+    @SuppressWarnings("WeakerAccess")
+    static final Intent HTC_BOOST_APP_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
+    @SuppressWarnings("WeakerAccess")
+    static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3"));
+    @SuppressWarnings("WeakerAccess")
     static final Intent ONEPLUS_DEEP_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeAppListActivity"));
 
+    @SuppressWarnings("WeakerAccess")
     public static final List<Intent> POWERMANAGER_INTENTS = Arrays.asList(
-            XIAOMI_INTENT,
+            XIAOMI_AUTOSTART_INTENT,
             HUAWEI_INTENT_EMUI_PREV_TO_5,
             HUAWEI_INTENT_EMUI_5_AND_LATER,
             OPPO_INTENT_1,
@@ -111,8 +117,8 @@ class Utils {
         boolean potentiallyBlocked = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             for (String manufacturer : BLOCKING_MANUFACTURERS) {
-                if (Build.MANUFACTURER.toLowerCase().contains(manufacturer) && !inWhiteList()) {
-                    potentiallyBlocked = oppoNougatOrRecent() && sonyLollipopOrRecent();
+                if ((Build.MANUFACTURER.toLowerCase().contains(manufacturer) && !inWhiteList()) || oppoNougatOrRecent() || sonyLollipopOrRecent()) {
+                    potentiallyBlocked = true;
                 }
             }
         }
@@ -133,7 +139,7 @@ class Utils {
         return installed;
     }
 
-    private static boolean canStartActivity(Context context, Intent intent) {
+    static boolean canStartActivity(Context context, Intent intent) {
         boolean intentResolved = false;
         List<ResolveInfo> list = context.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         if (list.size() > 0) {
@@ -154,4 +160,27 @@ class Utils {
         return Build.MANUFACTURER.toLowerCase().contains(MANUFACTURER_SONY) && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
+    static boolean preNougat() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
+    }
+
+    static boolean lollipopOrRecent() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
+    static boolean marshmallowOrRecent() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+    }
+
+    static boolean oreo() {
+        return Build.VERSION.SDK_INT == Build.VERSION_CODES.O;
+    }
+
+    static boolean preOreo() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.O;
+    }
+
+    static boolean preJellyBean() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN;
+    }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="20dp">
+
+    <TextView
+        android:id="@+id/advancedSolutionHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toStartOf="@id/advancedSolutionExpander"
+        android:layout_toLeftOf="@id/advancedSolutionExpander"
+        android:text="@string/pf_advanced_header" />
+
+    <ImageView
+        android:id="@+id/advancedSolutionExpander"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:contentDescription="@string/pf_content_description_additional_steps_expander"
+        android:src="@drawable/pf_ic_arrow_drop_down_black_24dp" />
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/advancedSolutionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/advancedSolutionExpander"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp" />
+
+
+</RelativeLayout>

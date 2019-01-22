@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="DialogActivity" parent="Theme.AppCompat.Light.Dialog">
+    <style name="PF_DialogActivity" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowFixedWidthMajor">100%</item>

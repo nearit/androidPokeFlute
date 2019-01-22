@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_htc_default">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Phone Settings &gt; Power &gt; Battery optimization</em>.</li>
+                <li>Select <em>All apps</em> from drag-down menu</li>
+                <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_htc_on_screen">
+        <![CDATA[
+            <ul>
+                <li>Select <em>All apps</em> from drag-down menu</li>
+                <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_htc_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Power &gt; Battery optimization</em>.</li>
+                <li>Select <em>All apps</em> from drag-down menu</li>
+                <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
+            </ul>
+        ]]>
+    </string>
+</resources>

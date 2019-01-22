@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_elephone_default">
+        <![CDATA[
+            <p>White list this app:</p>
+            <p>Go to <em>Phone settings &gt; Background task clear &gt; White list</em> and add this app to the whitelist.</p>
+        ]]>
+    </string>
+</resources>

@@ -2,37 +2,30 @@ package com.nearit.pokeflute;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.PixelFormat;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Settings;
+import android.os.PowerManager;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.text.Html;
+import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nearit.pokeflute.views.AdvancedSolution;
 
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static android.view.Gravity.BOTTOM;
 import static com.nearit.pokeflute.DrawOverUtility.DRAW_OVER_PERM_CODE;
-import static com.nearit.pokeflute.Utils.ASUS_INTENT;
 import static com.nearit.pokeflute.Utils.HUAWEI_INTENT_EMUI_5_AND_LATER;
 import static com.nearit.pokeflute.Utils.HUAWEI_INTENT_EMUI_PREV_TO_5;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_ASUS;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_ELEPHONE;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_HTC;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_HUAWEI;
+import static com.nearit.pokeflute.Utils.MANUFACTURER_LENOVO;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_MEIZU;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_NOKIA;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_ONEPLUS;
@@ -41,14 +34,14 @@ import static com.nearit.pokeflute.Utils.MANUFACTURER_SAMSUNG;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_SONY;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_VIVO;
 import static com.nearit.pokeflute.Utils.MANUFACTURER_XIAOMI;
-import static com.nearit.pokeflute.Utils.OPPO_INTENT_1;
-import static com.nearit.pokeflute.Utils.OPPO_INTENT_2;
-import static com.nearit.pokeflute.Utils.OPPO_INTENT_3;
-import static com.nearit.pokeflute.Utils.SAMSUNG_INTENT;
-import static com.nearit.pokeflute.Utils.VIVO_INTENT_1;
-import static com.nearit.pokeflute.Utils.VIVO_INTENT_2;
-import static com.nearit.pokeflute.Utils.VIVO_INTENT_3;
-import static com.nearit.pokeflute.Utils.XIAOMI_INTENT;
+import static com.nearit.pokeflute.Utils.XIAOMI_AUTOSTART_INTENT;
+import static com.nearit.pokeflute.Utils.XIAOMI_AUTOSTART_INTENT_2;
+import static com.nearit.pokeflute.Utils.XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT;
+import static com.nearit.pokeflute.Utils.canStartActivity;
+import static com.nearit.pokeflute.Utils.lollipopOrRecent;
+import static com.nearit.pokeflute.Utils.marshmallowOrRecent;
+import static com.nearit.pokeflute.Utils.oreo;
+import static com.nearit.pokeflute.Utils.preNougat;
 
 /**
  * @author Federico Boschini
@@ -56,39 +49,39 @@ import static com.nearit.pokeflute.Utils.XIAOMI_INTENT;
 public class SolutionActivity extends AppCompatActivity implements DrawOverUtility.DrawOverAlertListener {
 
     private final static String TAG = "SolutionActivity";
+    private final static int XIAOMI_REQUEST_CODE = 777;
 
-    private boolean drawnOverInstructions = false;
-
-    private HtmlTextView solutionText;
-    private HtmlTextView advancedSolutionText;
-    private TextView advancedSolutionHeader;
-    private AppCompatButton fixItButton;
-    private RelativeLayout advancedSolutionContainer;
-    private ImageView advancedSolutionExpander;
-    private TextView dialogIntroMessage;
+    private boolean canDrawOver = false;
+    private boolean drawPermissionCouldBeDenied = false;
 
     @Nullable
-    private OverlayInstructions overlayInstructions;
+    private HtmlTextView solutionText;
+    @Nullable
+    private AppCompatButton fixItButton;
+    @Nullable
+    private AdvancedSolution advancedSolution;
+    @Nullable
+    private TextView dialogIntroMessage;
 
     private DrawOverUtility drawOverUtility;
-
-    private final static Intent goToSettings = new Intent(android.provider.Settings.ACTION_SETTINGS);
-    private final static Intent goToPowerManager = new Intent(Intent.ACTION_POWER_USAGE_SUMMARY);
+    private ActivityLauncher activityLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         drawOverUtility = new DrawOverUtility(this, this);
+        activityLauncher = new ActivityLauncher(this);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (lollipopOrRecent()) {
             if (drawOverUtility.canDrawOver()) {
-                drawnOverInstructions = true;
+                canDrawOver = true;
                 init();
             } else {
                 drawOverUtility.showDrawOverDialog();
             }
         } else {
+            setResult(RESULT_OK);
             finish();
         }
     }
@@ -97,44 +90,40 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         setContentView(R.layout.pf_activity_solution);
         dialogIntroMessage = findViewById(R.id.dialogIntroMessage);
         solutionText = findViewById(R.id.solutionText);
-        advancedSolutionText = findViewById(R.id.advancedSolutionText);
         fixItButton = findViewById(R.id.goFixIt);
-        advancedSolutionContainer = findViewById(R.id.advancedSolutionContainer);
-        advancedSolutionExpander = findViewById(R.id.advancedSolutionExpander);
-        advancedSolutionHeader = findViewById(R.id.advancedSolutionHeader);
-
-        dialogIntroMessage.setText(Html.fromHtml(String.format(getResources().getString(R.string.dialog_intro_message), getResources().getString(R.string.fix_it_button))));
+        advancedSolution = findViewById(R.id.advancedSolution);
 
         showManufacturerSpecificSolution();
-
-        AppCompatButton notNowButton = findViewById(R.id.notNow);
-        notNowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setResult(RESULT_CANCELED);
-                finish();
-            }
-        });
     }
 
-    public void onAdvancedSolutionClicked(View view) {
-        if (advancedSolutionText.getVisibility() == View.GONE) {
-            advancedSolutionExpander.setImageResource(R.drawable.ic_arrow_drop_up_black_24dp);
-            advancedSolutionText.setVisibility(View.VISIBLE);
-        } else {
-            advancedSolutionExpander.setImageResource(R.drawable.ic_arrow_drop_down_black_24dp);
-            advancedSolutionText.setVisibility(View.GONE);
-        }
+    public void dismissActivity(View view) {
+        setResult(RESULT_CANCELED);
+        finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == DRAW_OVER_PERM_CODE) {
-            if (!drawOverUtility.canDrawOver()) {
-                drawOverUtility.showEnforceDrawOverDialog();
-            } else {
-                drawnOverInstructions = true;
-                init();
+        switch (requestCode) {
+            case DRAW_OVER_PERM_CODE: {
+                if (!drawOverUtility.canDrawOver()) {
+                    if (!oreo()) {
+                        drawOverUtility.showEnforceDrawOverDialog();
+                    } else {
+                        drawPermissionCouldBeDenied = true;
+                        init();
+                    }
+                } else {
+                    canDrawOver = true;
+                    init();
+                }
+                break;
+            }
+            case XIAOMI_REQUEST_CODE: {
+                break;
+            }
+            default: {
+                setResult(RESULT_OK);
+                finish();
             }
         }
     }
@@ -142,164 +131,60 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
     private void showManufacturerSpecificSolution() {
         switch (Build.MANUFACTURER.toLowerCase()) {
             /*case MANUFACTURER_NOKIA: {
-                solutionText.setHtml(getResources().getString(R.string.nokia));
-                advancedSolutionContainer.setVisibility(View.VISIBLE);
-                advancedSolutionText.setHtml(getResources().getString(R.string.nokia_advanced));
-                advancedSolutionHeader.setText(R.string.advanced_header);
-                onClickGoToSettings();
+                handleNokia();
+                break;
             }*/
             case MANUFACTURER_HUAWEI: {
-                solutionText.setHtml(getResources().getString(R.string.huawei));
-                advancedSolutionContainer.setVisibility(View.VISIBLE);
-                advancedSolutionText.setHtml(getResources().getString(R.string.huawei_additional));
-                advancedSolutionHeader.setText(R.string.additional_header);
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = startHuaweiActivity();
-                        if (!started) startActivity(goToSettings);
-                    }
-                });
+                handleHuawei();
                 break;
             }
+            case MANUFACTURER_NOKIA:
             case MANUFACTURER_XIAOMI: {
-                solutionText.setHtml(getResources().getString(R.string.xiaomi));
-                advancedSolutionContainer.setVisibility(View.VISIBLE);
-                advancedSolutionText.setHtml(getResources().getString(R.string.xiaomi_additional));
-                advancedSolutionHeader.setText(R.string.additional_header);
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = startXiaomiActivity();
-                        if (!started) startActivity(goToSettings);
-                    }
-                });
+                handleXiaomi();
                 break;
             }
             case MANUFACTURER_ASUS: {
-                solutionText.setHtml(getResources().getString(R.string.asus));
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = startAsusActivity();
-                        if (!started) startActivity(goToSettings);
-                    }
-                });
+                handleAsus();
                 break;
             }
             case MANUFACTURER_OPPO: {
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = startOppoActivity();
-                        if (!started) startActivity(goToSettings);
-                    }
-                });
+                handleOppo();
                 break;
             }
             case MANUFACTURER_ONEPLUS: {
-                solutionText.setHtml(getResources().getString(R.string.oneplus));
-                onClickGoToSettings();
+                handleOnePlus();
                 break;
             }
             case MANUFACTURER_VIVO: {
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = startVivoActivity();
-                        if (!started) startActivity(goToSettings);
-                    }
-                });
+                handleVivo();
                 break;
             }
             case MANUFACTURER_HTC: {
-                solutionText.setHtml(getResources().getString(R.string.htc));
-                onClickGoToSettings();
+                handleHtc();
                 break;
             }
             case MANUFACTURER_MEIZU: {
-                if (!drawnOverInstructions)
-                    solutionText.setHtml(getResources().getString(R.string.meizu));
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(goToSettings);
-                        if (drawnOverInstructions)
-                            drawOverEverything(getResources().getString(R.string.meizu_on_screen));
-                    }
-                });
+                handleMeizu();
                 break;
             }
             case MANUFACTURER_SAMSUNG: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    if (!drawnOverInstructions)
-                        solutionText.setHtml(getResources().getString(R.string.samsung_7_or_recent));
-                    fixItButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            boolean started = startSamsungActivity();
-                            if (started) {
-                                if (drawnOverInstructions)
-                                    drawOverEverything(getResources().getString(R.string.samsung_7_or_recent_on_screen));
-                            } else {
-                                startActivity(goToSettings);
-                            }
-                        }
-                    });
-                } else {
-                    solutionText.setHtml(getResources().getString(R.string.samsung));
-                    onClickGoToSettings();
-                }
+                handleSamsung();
                 break;
             }
             case MANUFACTURER_SONY: {
-                if (!drawnOverInstructions)
-                    solutionText.setHtml(getResources().getString(R.string.sony));
-                fixItButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        boolean started = eventuallyStartActivity(goToPowerManager);
-                        if (started) {
-                            if (drawnOverInstructions)
-                                drawOverEverything(getResources().getString(R.string.sony_on_screen));
-                        } else {
-                            startActivity(goToSettings);
-                            if (drawnOverInstructions)
-                                drawOverEverything(getResources().getString(R.string.sony_settings_on_screen));
-                        }
-                    }
-                });
+                handleSony();
                 break;
             }
             case MANUFACTURER_ELEPHONE: {
-                solutionText.setHtml(getResources().getString(R.string.elephone));
-                onClickGoToSettings();
+                handleElephone();
+                break;
+            }
+            case MANUFACTURER_LENOVO: {
+                handleLenovo();
                 break;
             }
             default: {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    fixItButton.setText(R.string.go_to_settings_button);
-                    dialogIntroMessage.setText(Html.fromHtml(String.format(getResources().getString(R.string.dialog_intro_message), getResources().getString(R.string.go_to_settings_button))));
-
-                    if (!drawnOverInstructions)
-                        solutionText.setHtml(getResources().getString(R.string.doze));
-
-                    fixItButton.setOnClickListener(new View.OnClickListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.M)
-                        @Override
-                        public void onClick(View v) {
-                            startActivity(new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-
-                            if (drawnOverInstructions)
-                                drawOverEverything(getResources().getString(R.string.doze));
-
-                            // KEEP AS A REMINDER: startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY));
-                        }
-                    });
-                } else {
-                    finish();
-                }
-
+                handleDefault();
                 break;
             }
         }
@@ -308,120 +193,440 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
     @Override
     protected void onResume() {
         super.onResume();
-        if (overlayInstructions != null && overlayInstructions.getWindowToken() != null) {
-            getWindowManager().removeViewImmediate(overlayInstructions);
-        }
-    }
-
-    private void drawOverEverything(String html) {
-        WindowManager.LayoutParams params;
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_PHONE,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    PixelFormat.TRANSLUCENT);
-        } else {
-            params = new WindowManager.LayoutParams(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT,
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    PixelFormat.TRANSLUCENT);
-        }
-
-        params.gravity = BOTTOM;
-
-        overlayInstructions = new OverlayInstructions(this);
-        overlayInstructions.setInstructions(html);
-
-        overlayInstructions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getWindowManager().removeViewImmediate(overlayInstructions);
-            }
-        });
-
-        if (getWindowManager() != null) {
-            getWindowManager().addView(overlayInstructions, params);
-        }
-
-        overlayInstructions.animateToBottom();
+        drawOverUtility.removeInstructions();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (overlayInstructions != null && getWindowManager() != null) {
-            getWindowManager().removeViewImmediate(overlayInstructions);
+        drawOverUtility.removeInstructions();
+    }
+
+    private void handleNokia() {
+        if (dialogIntroMessage != null) {
+            dialogIntroMessage.setText(R.string.pf_nokia_intro_message);
+        }
+        if (solutionText != null) {
+            solutionText.setHtml(getStringRes(R.string.pf_nokia_default));
+        }
+        if (advancedSolution != null) {
+            advancedSolution.show();
+            advancedSolution.setSolution(R.string.pf_nokia_advanced);
+            advancedSolution.setHeader(R.string.pf_advanced_header);
+        }
+        if (fixItButton != null) {
+            fixItButton.setText(R.string.pf_got_it_button);
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setResult(RESULT_OK);
+                    finish();
+                }
+            });
         }
     }
 
-    private boolean startHuaweiActivity() {
-        List<Intent> huaweiIntents = Arrays.asList(HUAWEI_INTENT_EMUI_5_AND_LATER, HUAWEI_INTENT_EMUI_PREV_TO_5);
-        for (Intent intent : huaweiIntents) {
-            if (eventuallyStartActivity(intent)) return true;
+    private void handleHuawei() {
+        // TODO: should show instructions for power plan too?
+        // advancedSolution.show();
+        // advancedSolutuion.setSolution(R.string.huawei_additional));
+        // advancedSolution.setHeader(R.string.pf_additional_header);
+        if (preNougat()) {
+            if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                if (!canStartActivity(this, HUAWEI_INTENT_EMUI_PREV_TO_5)) {
+                    solutionText.setHtml(getStringRes(R.string.pf_huawei_pre_7_default));
+                } else {
+                    solutionText.setHtml(getStringRes(R.string.pf_huawei_pre_7_on_screen));
+                }
+            }
+            if (fixItButton != null) {
+                fixItButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean started = activityLauncher.startHuaweiPre7Activity();
+                        if (started) {
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_pre_7_on_screen);
+                        } else {
+                            activityLauncher.goToSettings();
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_pre_7_on_screen_from_settings);
+                        }
+                    }
+                });
+            }
+        } else {
+            if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                if (!canStartActivity(this, HUAWEI_INTENT_EMUI_5_AND_LATER)) {
+                    solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_default));
+                } else {
+                    solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_on_screen));
+                }
+            }
+            if (fixItButton != null) {
+                fixItButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean started = activityLauncher.startHuawei7Activity();
+                        if (started) {
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_on_screen);
+                        } else {
+                            activityLauncher.goToSettings();
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_on_screen_from_settings);
+                        }
+                    }
+                });
+            }
         }
-        return false;
     }
 
-    private boolean startXiaomiActivity() {
-        return eventuallyStartActivity(XIAOMI_INTENT);
-    }
+    private void handleXiaomi() {
+        setContentView(R.layout.pf_activity_xiaomi_solution);
 
-    private boolean startOppoActivity() {
-        List<Intent> oppoIntents = Arrays.asList(OPPO_INTENT_1, OPPO_INTENT_2, OPPO_INTENT_3);
-        for (Intent intent : oppoIntents) {
-            if (eventuallyStartActivity(intent)) return true;
-        }
-        return false;
-    }
-
-    private boolean startAsusActivity() {
-        return eventuallyStartActivity(ASUS_INTENT);
-    }
-
-    private boolean startVivoActivity() {
-        List<Intent> vivoIntents = Arrays.asList(VIVO_INTENT_1, VIVO_INTENT_2, VIVO_INTENT_3);
-        for (Intent intent : vivoIntents) {
-            if (eventuallyStartActivity(intent)) return true;
-        }
-        return false;
-    }
-
-    private boolean startSamsungActivity() {
-        return eventuallyStartActivity(SAMSUNG_INTENT);
-    }
-
-    private boolean eventuallyStartActivity(Intent intent) {
-        boolean intentResolved = false;
-        List<ResolveInfo> list = getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-        if (list.size() > 0) {
-            startActivity(intent);
-            intentResolved = true;
-        }
-        return intentResolved;
-    }
-
-    private void onClickGoToSettings() {
-        dialogIntroMessage.setText(Html.fromHtml(String.format(getResources().getString(R.string.dialog_intro_message), getResources().getString(R.string.go_to_settings_button))));
-        fixItButton.setText(R.string.go_to_settings_button);
-        fixItButton.setOnClickListener(new View.OnClickListener() {
+        AppCompatButton notNow = findViewById(R.id.xiaomiNotNowButton);
+        notNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(goToSettings);
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
+
+        HtmlTextView batterySolution = findViewById(R.id.xiaomiBatteryUsageSolution);
+        if (canStartActivity(this, XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT)) {
+            if (!canDrawOver || drawPermissionCouldBeDenied) {
+                batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction_on_screen));
+            } else {
+                batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction));
+            }
+        } else {
+            batterySolution.setHtml(getStringRes(R.string.pf_xiaomi_battery_restriction_on_screen_from_settings));
+        }
+        AppCompatButton batteryButton = findViewById(R.id.xiaomiBatteryUsageButton);
+        batteryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean started = activityLauncher.startXiaomiBatteryUsageActivity();
+                if (started) {
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_battery_restriction_on_screen);
+                } else {
+                    activityLauncher.goToSettings(XIAOMI_REQUEST_CODE);
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_battery_restriction_on_screen_from_settings);
+                }
+            }
+        });
+
+        HtmlTextView autoRunSolution = findViewById(R.id.xiaomiAutoRunSolution);
+        if (canStartActivity(this, XIAOMI_AUTOSTART_INTENT) || canStartActivity(this, XIAOMI_AUTOSTART_INTENT_2)) {
+            if (!canDrawOver || drawPermissionCouldBeDenied) {
+                autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun_on_screen));
+            } else {
+                autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun));
+            }
+        } else {
+            autoRunSolution.setHtml(getStringRes(R.string.pf_xiaomi_autorun_on_screen_from_settings));
+        }
+        AppCompatButton autoRunButton = findViewById(R.id.xiaomiAutoRunButton);
+        autoRunButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean started = activityLauncher.startXiaomiAutoRunActivity();
+                if (started) {
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_autorun_on_screen);
+                } else {
+                    activityLauncher.goToSettings(XIAOMI_REQUEST_CODE);
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_autorun_on_screen_from_settings);
+                }
+            }
+        });
+
+        HtmlTextView internetDisablerSolution = findViewById(R.id.xiaomiInternetDisablerSolution);
+        if (canStartActivity(this, XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT)) {
+            if (!canDrawOver || drawPermissionCouldBeDenied) {
+                internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler_on_screen));
+            } else {
+                internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler));
+            }
+        } else {
+            internetDisablerSolution.setHtml(getStringRes(R.string.pf_xiaomi_internet_disabler_on_screen_from_settings));
+        }
+        AppCompatButton internetDisablerButton = findViewById(R.id.xiaomiInternetDisablerButton);
+        internetDisablerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean started = activityLauncher.startXiaomiBatteryUsageActivity();
+                if (started) {
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_internet_disabler_on_screen);
+                } else {
+                    activityLauncher.goToSettings(XIAOMI_REQUEST_CODE);
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_internet_disabler_on_screen_from_settings);
+                }
             }
         });
     }
 
-    public static Intent createIntent(Context context) {
-        return new Intent(context, SolutionActivity.class);
+    private void handleAsus() {
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_asus_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.startAsusActivity();
+                    if (started) {
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_asus_on_screen);
+                    } else {
+                        showError();
+                        // TODO: not sure if Asus Mobile Manager can be accessed from settings
+                        /*startActivityForResult(goToSettings, POWER_MANAGEMENT_REQUEST_CODE);
+                        eventuallyDrawOverEverything(getStringRes(R.string.asus_on_screen_from_settings));*/
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleOppo() {
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.startOppoActivity();
+                    if (!started) activityLauncher.goToSettings();
+                }
+            });
+        }
+    }
+
+    private void handleOnePlus() {
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_oneplus_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.startOnePlusActivity();
+                    if (started) {
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_oneplus_on_screen);
+                    } else {
+                        activityLauncher.goToPowerManager();
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_oneplus_on_screen_from_battery_settings);
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleVivo() {
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.startVivoActivity();
+                    if (!started) activityLauncher.goToSettings();
+                }
+            });
+        }
+    }
+
+    private void handleHtc() {
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_htc_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.goToBatteryOptimization();
+                    if (started) {
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_htc_on_screen);
+                    } else {
+                        activityLauncher.goToSettings();
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_htc_on_screen_from_settings);
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleMeizu() {
+        // TODO: should show instructions for power plan too?
+        /*advancedSolutionContainer.setVisibility(View.VISIBLE);
+        advancedSolutionText.setHtml(getStringRes(R.string.meizu_advanced));
+        advancedSolutionHeader.setText(R.string.additional_header);*/
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_meizu_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activityLauncher.goToSettings();
+                    drawOverUtility.eventuallyDrawOverEverything(R.string.pf_meizu_on_screen);
+                }
+            });
+        }
+    }
+
+    private void handleSamsung() {
+        if (preNougat()) {
+            if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                solutionText.setHtml(getStringRes(R.string.pf_samsung_pre_7_default));
+            }
+            if (fixItButton != null) {
+                fixItButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean started = activityLauncher.startSamsungPre7Activity();
+                        if (started) {
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_samsung_pre_7_on_screen);
+                        } else {
+                            activityLauncher.goToSettings();
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_samsung_pre_7_on_screen_from_settings);
+                        }
+                    }
+                });
+            }
+        } else {
+            if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                solutionText.setHtml(getStringRes(R.string.pf_samsung_7_or_recent_default));
+            }
+            if (fixItButton != null) {
+                fixItButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        boolean started = activityLauncher.startSamsung7Activity();
+                        if (started) {
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_samsung_7_or_recent_on_screen);
+                        } else {
+                            activityLauncher.goToSettings();
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_samsung_7_or_recent_on_screen_from_settings);
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    private void handleSony() {
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_sony_default));
+        }
+
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.goToPowerManager();
+                    if (started) {
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_sony_on_screen);
+                    } else {
+                        activityLauncher.goToSettings();
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_sony_on_screen_from_settings);
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleElephone() {
+        if (solutionText != null) {
+            solutionText.setHtml(getStringRes(R.string.pf_elephone_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activityLauncher.goToSettings();
+                }
+            });
+        }
+    }
+
+    private void handleLenovo() {
+        if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+            solutionText.setHtml(getStringRes(R.string.pf_lenovo_default));
+        }
+        if (fixItButton != null) {
+            fixItButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    boolean started = activityLauncher.startLenovoActivity();
+                    if (started) {
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_lenovo_on_screen);
+                    } else {
+                        activityLauncher.goToSettings();
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_lenovo_on_screen_from_settings);
+                    }
+                }
+            });
+        }
+    }
+
+    private void handleDefault() {
+        if (marshmallowOrRecent()) {
+            PowerManager pm = null;
+            boolean optimized = false;
+            try {
+                pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+            } catch (IllegalStateException e) {
+                Log.e(TAG, e.getLocalizedMessage());
+            }
+
+            if (pm != null) {
+                optimized = !pm.isIgnoringBatteryOptimizations(getPackageName());
+            }
+
+            if (optimized) {
+                if (fixItButton != null) {
+                    fixItButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            activityLauncher.goToBatteryOptimization();
+                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_doze_default);
+
+                            // KEEP AS A REMINDER: startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY));
+
+                            // KEEP AS A REMINDER, requires permission, can cause publish rejection:
+                            // startActivity(requestWhiteList.setData(Uri.parse("package:" + getPackageName())));
+                        }
+                    });
+                }
+
+                if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                    solutionText.setHtml(getStringRes(R.string.pf_doze_default));
+                }
+
+            } else {
+                setResult(RESULT_OK);
+                finish();
+            }
+        } else {
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
+
+    private String getStringRes(int resId) {
+        try {
+            return getString(resId);
+        } catch (Resources.NotFoundException e) {
+            return "";
+        }
+    }
+
+    private void showError() {
+        Toast.makeText(this, "Cannot fix issue", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onCanceled() {
-        drawnOverInstructions = false;
+        canDrawOver = false;
         init();
+    }
+
+
+    public static Intent createIntent(Context context) {
+        return new Intent(context, SolutionActivity.class);
     }
 }

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">
 
@@ -17,7 +16,7 @@
         android:paddingTop="20dp"
         android:paddingEnd="20dp"
         android:paddingRight="20dp"
-        android:text="@string/dialog_title"
+        android:text="@string/pf_dialog_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         tools:text="Warning!" />
 
@@ -32,7 +31,7 @@
         android:paddingTop="10dp"
         android:paddingEnd="20dp"
         android:paddingRight="20dp"
-        android:text="@string/dialog_intro_message"
+        android:text="@string/pf_default_intro_message"
         tools:text="Your phone could be blocking this app." />
 
     <org.sufficientlysecure.htmltextview.HtmlTextView
@@ -47,59 +46,19 @@
         android:paddingEnd="20dp"
         android:paddingRight="20dp" />
 
-    <RelativeLayout
-        android:id="@+id/advancedSolutionContainer"
+    <com.nearit.pokeflute.views.AdvancedSolution
+        android:id="@+id/advancedSolution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/solutionText"
         android:layout_marginTop="20dp"
-        android:visibility="gone"
-        android:onClick="onAdvancedSolutionClicked">
-
-        <TextView
-            android:id="@+id/advancedSolutionHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_toStartOf="@id/advancedSolutionExpander"
-            android:layout_toLeftOf="@id/advancedSolutionExpander"
-            android:onClick="onAdvancedSolutionClicked"
-            android:text="@string/advanced_header" />
-
-        <ImageView
-            android:id="@+id/advancedSolutionExpander"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginRight="20dp"
-            android:contentDescription="@string/content_description_additional_steps_expander"
-            android:onClick="onAdvancedSolutionClicked"
-            android:src="@drawable/ic_arrow_drop_down_black_24dp" />
-
-        <org.sufficientlysecure.htmltextview.HtmlTextView
-            android:id="@+id/advancedSolutionText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/advancedSolutionExpander"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"
-            android:paddingEnd="20dp"
-            android:paddingRight="20dp" />
-
-    </RelativeLayout>
+        android:visibility="gone" />
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/advancedSolutionContainer"
+        android:layout_below="@id/advancedSolution"
         android:layout_marginTop="15dp"
         android:paddingStart="5dp"
         android:paddingLeft="5dp"
@@ -114,7 +73,8 @@
             android:layout_alignWithParentIfMissing="true"
             android:layout_toStartOf="@id/goFixIt"
             android:layout_toLeftOf="@id/goFixIt"
-            android:text="@string/not_now_button"
+            android:text="@string/pf_not_now_button"
+            android:onClick="dismissActivity"
             android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 
         <android.support.v7.widget.AppCompatButton
@@ -124,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="@string/fix_it_button"
+            android:text="@string/pf_fix_it_button"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             tools:visibility="visible" />
 

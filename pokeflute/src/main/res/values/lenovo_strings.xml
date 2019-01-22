@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_lenovo_default">
+        <![CDATA[
+            <p>Go to <em>Power manager (Battery) &gt; Background app management</em> and eventually <strong>disable it</strong> for this app</p>
+        ]]>
+    </string>
+    <string name="pf_lenovo_on_screen">
+        <![CDATA[
+            <p>Go to <em>Background app management</em> and eventually <strong>disable it</strong> for this app</p>
+        ]]>
+    </string>
+    <string name="pf_lenovo_on_screen_from_settings">
+        <![CDATA[
+            <p>Go to <em>Power manager (Battery) &gt; Background app management</em> and eventually <strong>disable it</strong> for this app</p>
+        ]]>
+    </string>
+</resources>

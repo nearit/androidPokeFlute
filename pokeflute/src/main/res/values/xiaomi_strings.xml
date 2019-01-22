@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pf_xiaomi_intro_message"><p>Your phone could be blocking this app.</p></string>
+
+
+    <!--    BATTERY USAGE RESTRICTION     -->
+    <string name="pf_xiaomi_battery_restriction">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Additional Settings &gt; Battery & Performance &gt; Manage Apps Battery Usage &gt; Choose Apps</em></li>
+                <li>select this app &gt; <em>Background settings</em> set to <strong>No restrictions</strong></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_battery_restriction_on_screen">
+        <![CDATA[
+            <p>select this app &gt; <em>Background settings</em> set to <strong>No restrictions</strong></p>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_battery_restriction_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Additional Settings &gt; Battery & Performance &gt; Manage Apps Battery Usage &gt; Choose Apps</em></li>
+                <li>select this app &gt; <em>Background settings</em> set to <strong>No restrictions</strong></li>
+            </ul>
+        ]]>
+    </string>
+
+
+
+
+    <!--    AUTO-RUN/AUTO-LAUNCH  -->
+    <string name="pf_xiaomi_autorun">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Permissions &gt; Auto-run management</em></li>
+                <li><strong>Enable it</strong> for this app</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_autorun_on_screen">
+        <![CDATA[
+            <p><strong>Enable</strong> <em>auto-run</em> or <em>auto-launch</em> for this app</p>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_autorun_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Permissions &gt; Auto-run management</em></li>
+                <li><strong>Enable it</strong> for this app</li>
+            </ul>
+        ]]>
+    </string>
+
+
+
+    <!--    INTERNET DISABLER     -->
+    <string name="pf_xiaomi_internet_disabler">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Additional Settings &gt; Battery & Performance &gt; Power &gt; press Settings button</em></li>
+                <li><em>Disable internet -&gt; Never</em></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_internet_disabler_on_screen">
+        <![CDATA[
+            <ul>
+                <li>Press <em>Settings button</em></li>
+                <li><em>Disable internet -&gt; Never</em></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_xiaomi_internet_disabler_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Additional Settings &gt; Battery & Performance &gt; Power &gt; press Settings button</em></li>
+                <li><em>Disable internet -&gt; Never</em></li>
+            </ul>
+        ]]>
+    </string>
+
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_huawei_pre_7_default">
+        <![CDATA[
+            <p><strong>Turn on protection</strong> for this app<br>or<br><strong>set to <em>Manage manually</em></strong> and <strong>turn everything on</strong></p>
+        ]]>
+    </string>
+    <string name="pf_huawei_pre_7_on_screen">
+        <![CDATA[
+            <p><strong>Turn on protection</strong> for this app</p>
+        ]]>
+    </string>
+    <string name="pf_huawei_pre_7_on_screen_from_settings">
+        <![CDATA[
+            <p><strong>Turn on protection</strong> for this app<br>or<br><strong>set to <em>Manage manually</em></strong> and <strong>turn everything on</strong></p>
+        ]]>
+    </string>
+    <string name="pf_huawei_7_or_recent_default">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery &gt; Launch</em> (or <em>App Launch</em> or <em>Lock screen cleanup</em>)</li>
+                <li><strong>Disable</strong> <em>Manage automatically</em> for this app</li>
+                <li>Be sure that everything is <strong>turned on</strong> in the next screen</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_huawei_7_or_recent_on_screen">
+        <![CDATA[
+            <ul>
+                <li><strong>Disable</strong> <em>Manage automatically</em> for this app</li>
+                <li>Be sure that everything is <strong>turned on</strong> in the next screen</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_huawei_7_or_recent_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery &gt; Launch</em> (or <em>App Launch<em> or <em>Lock screen cleanup</em>)</li>
+                <li><strong>Disable</strong> <em>Manage automatically</em> for this app</li>
+                <li>Be sure that everything is <strong>turned on</strong> in the next screen</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_huawei_additional">
+        <![CDATA[
+            <p>Go to <em>Phone settings &gt; Advanced Settings &gt; Battery manager &gt; Power plan</em> set it to <strong><em>Performance</em></strong></p>
+        ]]>
+    </string>
+</resources>

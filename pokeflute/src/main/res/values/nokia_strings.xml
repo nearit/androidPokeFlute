@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="pf_nokia_intro_message"><p>Your phone could be blocking this app.</p></string>
+    <string name="pf_nokia_default">
+        <![CDATA[
+            <p>Currently there is no known solution for your phone.</p>
+            <p>Please, consider <a href="https://www.nokia.com/phones/en_int/support#contact-us">contacting the manufacturer</a></p>
+        ]]>
+    </string>
+    <string name="pf_nokia_advanced" tools:ignore="TypographyDashes">
+        <![CDATA[
+            <strong>Nokia 1</strong>
+            <p>Uninstall the <em>com.evenwell.emm</em> package via the following adb commands:</p>
+            <p style="text-align: left">adb shell</p>
+            <p style="text-align: left">pm uninstall --user 0 com.evenwell.emm</p>
+
+            <strong>Other Nokia models</strong>
+            <p>Uninstall the <em>com.evenwell.powersaving.g3</em> package via the following adb commands:</p>
+            <p style="text-align: left;">adb shell</p>
+            <p style="text-align: left;">pm uninstall --user 0 com.evenwell.powersaving.g3</p>
+        ]]>
+    </string>
+</resources>

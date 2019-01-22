@@ -1,207 +1,36 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
+
+    <string name="pf_dialog_title">Warning!</string>
+
+    <string name="pf_default_intro_message">
+        <![CDATA[
+            <p>Your phone could be blocking this app.</p>
+            <p>Tap <strong>Fix it</strong> button and follow the instructions.</p>
+        ]]>
+    </string>
+
+    <string name="pf_fix_it_button">Fix it</string>
+    <string name="pf_not_now_button">Not now</string>
+    <string name="pf_got_it_button">Got it</string>
+
+    <!--    ADVANCED SOLUTION        -->
+    <string name="pf_advanced_header">Advanced solution</string>
+    <string name="pf_additional_header">Additional steps</string>
+    <string name="pf_content_description_additional_steps_expander">Tap and read additional steps</string>
 
     <!--    DRAW OVER OTHER APPS DIALOG     -->
-    <string name="enable_draw_over_button">OK</string>
-    <string name="enable_draw_over_message">Let this app draw on screen instructions</string>
-    <string name="enable_draw_over_enforce_message">
-        <b>Let this app draw on screen instructions.</b>\n\nThe steps needed to solve the issue are for tech-savvy users.
-    </string>
-
-    <string name="dialog_intro_message">
-        <![CDATA[
-        <p>Your phone could be blocking this app.</p>
-        <p>Tap <b>%s</b> button and follow the instructions.</p>
-        ]]>
-    </string>
-    <string name="dialog_title">Warning!</string>
-
-    <string name="go_to_settings_button">Go to settings</string>
-    <string name="fix_it_button">Fix it</string>
-    <string name="not_now_button">Not now</string>
-
-
-    <string name="advanced_header">Advanced solution</string>
-    <string name="additional_header">Additional steps</string>
-
-    <string name="content_description_additional_steps_expander">Tap and read additional steps</string>
-
-
-    <!--    ONEPLUS     -->
-    <string name="oneplus">
-        <![CDATA[
-            <p>Turn off <strong>System Settings &gt; Apps &gt; Gear Icon &gt; Special Access &gt; Battery Optimization</strong>.</p>
-            <p>Also try: <strong>Phone settings &gt; Battery &gt; Battery optimization</strong> and switch to the All apps list <strong>(Top menu) &gt; Your app &gt; Don’t optimize</strong></p>
-        ]]>
-    </string>
-
-
-
-    <!--    HTC     -->
-    <string name="htc">
-        <![CDATA[
-            <ul>
-                <li>Open up <strong>Phone Settings</strong>.</li>
-                <li>Tap <strong>Power</strong>.</li>
-                <li>Tap <strong>Battery optimization</strong>.</li>
-                <li>Tap <strong>Not optimized &gt; All apps</strong> to see the complete list of apps.</li>
-                <li>To turn off battery optimization in an app, tap the app name, and then tap <strong>Don’t optimize &gt; Done</strong>.</li>
-            </ul>
-        ]]>
-    </string>
-
-
-
-    <!--    NOKIA       -->
-    <string name="nokia">
-        <![CDATA[
-            <p>To fix this issue, please do the following:</p><ul><li>Go to <strong>Phone settings &gt; Apps &gt; See all apps</strong>.</li><li>Tap on the <strong>right top corner menu &gt; Show system</strong>.</li><li>Find <strong>Battery protection</strong> app in the list, select it and <strong>Force close</strong>. It will remain stopped until the next restart. From now on, background apps should work normally and use the standard Android battery optimizations.</li></ul>
-        ]]>
-    </string>
-    <string name="nokia_advanced" tools:ignore="TypographyDashes">
-        <![CDATA[
-            <h3>Nokia 1 (Android Go)</h3><p>Uninstall the <em>com.evenwell.emm</em> package via the following adb commands:</p>
-            <p style="text-align: left">adb shell</p>
-            <p style="text-align: left">pm uninstall --user 0 com.evenwell.emm</p>
-
-            <h3>Other Nokia models</h3><p>Uninstall the <em>com.evenwell.powersaving.g3</em> package via the following adb commands:</p>
-            <p style="text-align: left;">adb shell</p>
-            <p style="text-align: left;">pm uninstall --user 0 com.evenwell.powersaving.g3</p>
-        ]]>
-    </string>
-
-
-
-    <!--    HUAWEI      -->
-    <string name="huawei">
-        <![CDATA[
-            <p>Press <strong>Fix it</strong> and protect your app in the screen launched.<p>Depending on your phone model you should:</p>
-            <p><strong>Turn on protection</strong> for this app<br>or<br><strong>set to <em>Manage manually</em></strong> and <strong>turn everything on</strong></p>
-        ]]>
-    </string>
-    <string name="huawei_additional">
-        <![CDATA[
-            <ul>
-                <li>Go to <em>Phone settings &gt; Advanced Settings &gt; Battery manager &gt; Power plan</em> set it to <strong><em>Performance</em></strong></li>
-            </ul>
-        ]]>
-    </string>
-
-
-
-    <!--    XIAOMI      -->
-    <string name="xiaomi">
-        <![CDATA[
-            <p>Press <strong>Fix it</strong> and protect your app in the screen launched.<p>Depending on your phone model you should:</p><p>
-        ]]>
-    </string>
-    <string name="xiaomi_additional">
-        <![CDATA[
-            <ul><li>Go to <em>Phone settings &gt; Advanced Settings &gt; Battery manager &gt; Power plan</em> set it to <strong><em>Performance</em></strong></li></ul>
-        ]]>
-    </string>
-
-
-
-    <!--    SONY        -->
-    <string name="sony">
-        <![CDATA[
-            <p>Disable STAMINA mode for this app.
-            <br>Depending on your phone model you should:</p>
-            <p>Go to <em>Phone settings &gt; Power Management &gt; Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
-            <p>or</p>
-            <p><br>Go to <em>Phone settings &gt; Battery &gt; Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
-        ]]>
-    </string>
-    <string name="sony_settings_on_screen">
-        <![CDATA[
-            <p>Depending on your phone model you should:</p>
-            <p>Go to <em>Power Management &gt; Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
-            <p>or</p>
-            <p><br>Go to <em>Battery &gt; Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
-        ]]>
-    </string>
-    <string name="sony_on_screen">
-        <![CDATA[
-            <p>Depending on your phone model you should:</p>
-            <p>Go to <em>Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
-            <p>or</p>
-            <p><br>Go to <em>Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
-        ]]>
-    </string>
-
-
-
-    <!--    SAMSUNG     -->
-    <string name="samsung_7_or_recent">
-        <![CDATA[
-            You should add this app to <strong>Unmonitored apps</strong> list:
-            <ul>
-                <li>press <strong>Fix it</strong> and scroll to the bottom of the screen that appears</li>
-                <li>press <em>Unmonitored apps</em></li><li><strong>add this app</strong></li>
-            </ul>
-        ]]>
-    </string>
-    <string name="samsung_7_or_recent_on_screen">
-        <![CDATA[
-            You should add this app to <strong>Unmonitored apps</strong> list:
-            <ul>
-                <li>scroll to the bottom of the screen</li>
-                <li>press <em>Unmonitored apps</em></li>
-                <li><strong>add this app</strong></li>
-            </ul>
-        ]]>
-    </string>
-    <string name="samsung"><![CDATA[]]></string>
-
-
-
-    <!--    ELEPHONE        -->
-    <string name="elephone">
-        <![CDATA[
-            <p>White list this app:</p>
-            <p>Go to <em>Phone settings &gt; Background task clear &gt; White list</em> and add this app to the whitelist.</p>
-        ]]>
-    </string>
-
-
-
-    <!--    ASUS        -->
-    <string name="asus">
-        <![CDATA[
-            <p>Press <strong>Fix it</strong>, go to <em>Auto-start Manager</em> and <strong>enable</strong> this app</p>
-        ]]>
-    </string>
-
-
-
-    <!--    MEIZU    -->
-    <string name="meizu">
-        <![CDATA[
-        <p>Adjust your settings:</p>
-        <ul>
-            <li><em>Advanced Settings &gt; Battery manager &gt; Power plan</em> set to <strong>Performance</strong></li>
-            <li><em>Advanced Settings &gt; Battery Manager &gt; Protected apps</em> – check your app as <strong>Protected</strong></li>
-            <li><em>Apps &gt; This app &gt; Battery &gt; Power-intensive prompt</em> and enable <strong>Keep running after screen off</strong></li>
-        </ul>
-        ]]>
-    </string>
-    <string name="meizu_on_screen">
-        <![CDATA[
-        <ul>
-            <li><em>Advanced Settings &gt; Battery manager &gt; Power plan</em> set to <strong>Performance</strong></li>
-            <li><em>Advanced Settings &gt; Battery Manager &gt; Protected apps</em> – check your app as <strong>Protected</strong></li>
-            <li><em>Apps &gt; This app &gt; Battery &gt; Power-intensive prompt</em> and enable <strong>Keep running after screen off</strong></li>
-        </ul>
-        ]]>
-    </string>
+    <string name="pf_enable_draw_over_dialog_positive_button">OK</string>
+    <string name="pf_enable_draw_over_dialog_negative_button">Not now</string>
+    <string name="pf_enable_draw_over_dialog_message">Let this app draw on screen instructions</string>
+    <string name="pf_enable_draw_over_dialog_enforce_message"><b>Let this app draw on screen instructions.</b>\n\nThe steps needed to solve the issue are for tech-savvy users.</string>
 
 
 
     <!--    GENERIC Android 6.0+ doze mode      -->
-    <string name="doze">
+    <string name="pf_doze_default">
         <![CDATA[
         <ul>
-            <li>Select <em>All apps</em> from drag-down menu</li>
+            <li>Select <em>All apps</em> from drop-down menu</li>
             <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
         </ul>
         ]]>
