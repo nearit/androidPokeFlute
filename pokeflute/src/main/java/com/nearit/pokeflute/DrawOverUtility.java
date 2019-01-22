@@ -25,7 +25,7 @@ class DrawOverUtility {
 
     private final Activity activity;
     private DrawOverAlertListener listener;
-    
+
     @Nullable
     private OverlayInstructions overlayInstructions;
 

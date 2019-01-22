@@ -135,15 +135,14 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
 
     private void showManufacturerSpecificSolution() {
         switch (Build.MANUFACTURER.toLowerCase()) {
-            /*case MANUFACTURER_NOKIA: {
+            case MANUFACTURER_NOKIA: {
                 handleNokia();
                 break;
-            }*/
+            }
             case MANUFACTURER_HUAWEI: {
                 handleHuawei();
                 break;
             }
-            case MANUFACTURER_NOKIA:
             case MANUFACTURER_XIAOMI: {
                 handleXiaomi();
                 break;
