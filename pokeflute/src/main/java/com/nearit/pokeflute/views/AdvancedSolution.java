@@ -101,6 +101,20 @@ public class AdvancedSolution extends RelativeLayout {
         }
     }
 
+    public void collapse() {
+        if (solution != null && expanderIcon != null) {
+            expanderIcon.setImageResource(R.drawable.pf_ic_arrow_drop_down_black_24dp);
+            solution.setVisibility(View.GONE);
+        }
+    }
+
+    public void expand() {
+        if (solution != null && expanderIcon != null) {
+            expanderIcon.setImageResource(R.drawable.pf_ic_arrow_drop_up_black_24dp);
+            solution.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void show() {
         setVisibility(VISIBLE);
     }
