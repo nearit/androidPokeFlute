@@ -5,12 +5,10 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PowerManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,8 +37,8 @@ import static com.nearit.pokeflute.Utils.XIAOMI_AUTOSTART_INTENT;
 import static com.nearit.pokeflute.Utils.XIAOMI_AUTOSTART_INTENT_2;
 import static com.nearit.pokeflute.Utils.XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT;
 import static com.nearit.pokeflute.Utils.canStartActivity;
+import static com.nearit.pokeflute.Utils.isDozeOptimized;
 import static com.nearit.pokeflute.Utils.lollipopOrRecent;
-import static com.nearit.pokeflute.Utils.marshmallowOrRecent;
 import static com.nearit.pokeflute.Utils.oreo;
 import static com.nearit.pokeflute.Utils.preNougat;
 
@@ -49,11 +47,14 @@ import static com.nearit.pokeflute.Utils.preNougat;
  */
 public class SolutionActivity extends AppCompatActivity implements DrawOverUtility.DrawOverAlertListener {
 
+    @SuppressWarnings("unused")
     private final static String TAG = "SolutionActivity";
+
     private final static int XIAOMI_REQUEST_CODE = 777;
 
     private boolean canDrawOver = false;
     private boolean drawPermissionCouldBeDenied = false;
+    private boolean dozeFixLaunched = false;
 
     @Nullable
     private HtmlTextView solutionText;
@@ -127,7 +128,18 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
                 break;
             }
             default: {
-                setResult(RESULT_OK);
+                drawOverUtility.removeInstructions();
+
+                if (dozeFixLaunched) {
+                    if (!isDozeOptimized(this)) {
+                        setResult(RESULT_OK);
+                    } else {
+                        setResult(RESULT_CANCELED);
+                    }
+                } else {
+                    setResult(RESULT_OK);
+                }
+
                 finish();
             }
         }
@@ -192,18 +204,6 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
                 break;
             }
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        drawOverUtility.removeInstructions();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        drawOverUtility.removeInstructions();
     }
 
     private void handleNokia() {
@@ -569,43 +569,28 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
     }
 
     private void handleDefault() {
-        if (marshmallowOrRecent()) {
-            PowerManager pm = null;
-            boolean optimized = false;
-            try {
-                pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-            } catch (IllegalStateException e) {
-                Log.e(TAG, e.getLocalizedMessage());
+        if (isDozeOptimized(this)) {
+            if (fixItButton != null) {
+                fixItButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        activityLauncher.goToBatteryOptimization();
+                        drawOverUtility.eventuallyDrawOverEverything(R.string.pf_doze_default);
+
+                        dozeFixLaunched = true;
+
+                        // KEEP AS A REMINDER: startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY));
+
+                        // KEEP AS A REMINDER, requires permission, can cause publish rejection:
+                        // startActivity(requestWhiteList.setData(Uri.parse("package:" + getPackageName())));
+                    }
+                });
             }
 
-            if (pm != null) {
-                optimized = !pm.isIgnoringBatteryOptimizations(getPackageName());
+            if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
+                solutionText.setHtml(getStringRes(R.string.pf_doze_default));
             }
 
-            if (optimized) {
-                if (fixItButton != null) {
-                    fixItButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            activityLauncher.goToBatteryOptimization();
-                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_doze_default);
-
-                            // KEEP AS A REMINDER: startActivity(new Intent(Intent.ACTION_POWER_USAGE_SUMMARY));
-
-                            // KEEP AS A REMINDER, requires permission, can cause publish rejection:
-                            // startActivity(requestWhiteList.setData(Uri.parse("package:" + getPackageName())));
-                        }
-                    });
-                }
-
-                if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
-                    solutionText.setHtml(getStringRes(R.string.pf_doze_default));
-                }
-
-            } else {
-                setResult(RESULT_OK);
-                finish();
-            }
         } else {
             setResult(RESULT_OK);
             finish();
