@@ -1,4 +1,5 @@
 # androidPokeFlute
+
 Here at NearIT we constantly pay attention to UX, user permission requests and app background functionality.
 Mobile users can experience some issues caused by aggressive power management and app blocking policies imposed by smartphone vendors.
 Inspired by [dontkillmyapp.com](https://dontkillmyapp.com), we want to provide an Android library that checks and handles those strange scenarios by asking the user to whitelist or protect an app.
@@ -22,7 +23,9 @@ Once you found out that your app could be blocked, you can start our all-in-one 
 startActivity(SolutionActivity.createIntent(this));
 ```
 
-## Know issues:
+![history list](images/dozeFix_3.gif)
+
+## Know issues
 
 * Missing Oppo instructions.
 * Missing Vivo instructions.
@@ -35,7 +38,7 @@ startActivity(SolutionActivity.createIntent(this));
 
 * Investigate and handle cleaner apps such as Clean Master or Security Manager.
 
-## Tested on:
+## Tested on
 
 Manufacturer | Device name   | Device code | Android version | Notes
 ------------ | ------------- | ----------- | --------------- | ---------
@@ -52,6 +55,7 @@ Samsung      |  Core Prime   |   SM-G316F  |    5.1.1        |  Pre-Nougat App O
 Samsung      |  J7 (2016)    |   SM-J710F  |    8.1.0        |  Nougat Unmonitored apps
 
 # Want to contribute?
+
 This is not production-ready and we are still discussing a universal UX solution.
 Currently, we appreciate anyone testing the solution on various smartphones to increase the supported phones list.
 In the PR, please include screenshots or video of the testing results.
