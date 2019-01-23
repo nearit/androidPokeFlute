@@ -1,4 +1,24 @@
+buildscript {
+    repositories {
+        jcenter()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    dependencies {
+        classpath 'com.novoda:gradle-build-properties-plugin:0.3'
+    }
+}
+
+plugins {
+    id "com.jfrog.bintray" version "1.7.3"
+}
+
 apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.novoda.build-properties'
+apply from: 'distribution.gradle'
 
 android {
     buildToolsVersion "28.0.3"
@@ -6,7 +26,6 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
