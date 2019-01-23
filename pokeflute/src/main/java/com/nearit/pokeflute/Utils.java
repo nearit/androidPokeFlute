@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
+import android.os.PowerManager;
+import android.util.Log;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.List;
  * @author Federico Boschini
  */
 public class Utils {
+
+    private static final String TAG = "PF_Utils";
 
     /**
      * Manufacturers known for using app blockers / power managers.
@@ -182,5 +186,22 @@ public class Utils {
 
     static boolean preJellyBean() {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN;
+    }
+
+    static boolean isDozeOptimized(Context context) {
+        boolean optimized = false;
+        if (marshmallowOrRecent()) {
+            PowerManager pm = null;
+            try {
+                pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+            } catch (IllegalStateException e) {
+                Log.e(TAG, e.getLocalizedMessage());
+            }
+
+            if (pm != null) {
+                optimized = !pm.isIgnoringBatteryOptimizations(context.getPackageName());
+            }
+        }
+        return optimized;
     }
 }
