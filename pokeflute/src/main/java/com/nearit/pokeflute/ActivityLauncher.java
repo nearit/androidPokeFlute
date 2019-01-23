@@ -36,7 +36,7 @@ import static com.nearit.pokeflute.Utils.marshmallowOrRecent;
  */
 class ActivityLauncher {
 
-    final static int POWER_MANAGEMENT_REQUEST_CODE = 555;
+    private final static int POWER_MANAGEMENT_REQUEST_CODE = 555;
     private final Activity activity;
 
     private final static Intent goToSettings = new Intent(android.provider.Settings.ACTION_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -127,7 +127,7 @@ class ActivityLauncher {
         return eventuallyStartActivity(SAMSUNG_INTENT_LOLLIPOP);
     }
 
-    boolean eventuallyStartActivity(Intent intent) {
+    private boolean eventuallyStartActivity(Intent intent) {
         boolean intentResolved = false;
         List<ResolveInfo> list = activity.getPackageManager().queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         if (list.size() > 0) {
