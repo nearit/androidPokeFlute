@@ -50,6 +50,7 @@ Motorola     |  Moto x4      |   XT1900-7  |    9.0          |  Android doze
 Nokia        |  7 Plus       |   7 plus    |    9.0          |  Evenwell Power saver
 OnePlus      |  OnePlus6     |   A6003     |    9.0          |  Non-standard doze
 Samsung      |  Galaxy S4    |   GT-I9505  |    5.0.1        |  Pre-Nougat App Optimisation
+Samsung      |  A5 (2015)    |   SM-A500FU |    6.0.1        |  Pre-Nougat App Optimisation
 Samsung      |  A5 (2016)    |   SM-A510F  |    7.0          |  Nougat Unmonitored apps
 Samsung      |  Core Prime   |   SM-G316F  |    5.1.1        |  Pre-Nougat App Optimisation
 Samsung      |  J7 (2016)    |   SM-J710F  |    8.1.0        |  Nougat Unmonitored apps
