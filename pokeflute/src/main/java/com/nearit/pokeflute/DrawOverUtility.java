@@ -103,7 +103,7 @@ class DrawOverUtility {
             overlayInstructions.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    activity.getWindowManager().removeViewImmediate(overlayInstructions);
+                    removeInstructions();
                 }
             });
 
