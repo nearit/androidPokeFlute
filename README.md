@@ -22,7 +22,8 @@ Once you found out that your app could be blocked, you can start our all-in-one 
 startActivity(SolutionActivity.createIntent(this));
 ```
 
-# Know issues:
+## Know issues:
+
 * Missing Oppo instructions.
 * Missing Vivo instructions.
 * Lenovo P2 (and similar) not handled.
@@ -30,19 +31,21 @@ startActivity(SolutionActivity.createIntent(this));
 * English only localization
 * Not sure about solution for OnePlus with Android version < P.
 
-# Coming soon
+## Coming soon
+
 * Investigate and handle cleaner apps such as Clean Master or Security Manager.
 
-# Tested on:
+## Tested on:
+
 Manufacturer | Device name   | Device code | Android version | Notes
 ------------ | ------------- | ----------- | --------------- | ---------
-Huawei       |  Mate S       |   CRR-L09   |    5.1.1        |
-Huawei       |  Honor 8      |   FRD-L09   |    6.0          |
-Huawei       |  Mate 10 lite |   RNE-L21   |    8.0.0        |
-Lenovo       |  K6           |   K33A48    |    7.0          |
+Huawei       |  Mate S       |   CRR-L09   |    5.1.1        |  Protect App
+Huawei       |  Honor 8      |   FRD-L09   |    6.0          |  Protect App
+Huawei       |  Mate 10 lite |   RNE-L21   |    8.0.0        |  Lock screen cleanup
+Lenovo       |  K6           |   K33A48    |    7.0          |  Background app management
 Motorola     |  Moto x4      |   XT1900-7  |    9.0          |  Android doze
 Nokia        |  7 Plus       |   7 plus    |    9.0          |  Evenwell Power saver
-OnePlus      |  OnePlus6     |   A6003     |    9.0          |
+OnePlus      |  OnePlus6     |   A6003     |    9.0          |  Non-standard doze
 Samsung      |  Galaxy S4    |   GT-I9505  |    5.0.1        |  Pre-Nougat App Optimisation
 Samsung      |  A5 (2016)    |   SM-A510F  |    7.0          |  Nougat Unmonitored apps
 Samsung      |  Core Prime   |   SM-G316F  |    5.1.1        |  Pre-Nougat App Optimisation
