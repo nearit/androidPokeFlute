@@ -357,7 +357,7 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         internetDisablerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean started = activityLauncher.startXiaomiBatteryUsageActivity();
+                boolean started = activityLauncher.startXiaomiInternetDisablerActivity();
                 if (started) {
                     drawOverUtility.eventuallyDrawOverEverything(R.string.pf_xiaomi_internet_disabler_on_screen);
                 } else {
