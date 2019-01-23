@@ -1,7 +1,7 @@
 # androidPokeFlute
 Here at NearIT we constantly pay attention to UX, user permission requests and app background functionality.
 Mobile users can experience some issues caused by aggressive power management and app blocking policies imposed by smartphone vendors.
-Inspired by [dontkillmyapp.com](https://dontkillmyapp.com), we want to provide an Android library that checks and handles those strange scenarios by asking the user to whitelist or protected an app.
+Inspired by [dontkillmyapp.com](https://dontkillmyapp.com), we want to provide an Android library that checks and handles those strange scenarios by asking the user to whitelist or protect an app.
 
 We provide these useful methods:
 
