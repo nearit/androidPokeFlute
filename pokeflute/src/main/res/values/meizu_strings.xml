@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_meizu_default">
+        <![CDATA[
+        <p>Adjust your settings:</p>
+        <ul>
+            <li><em>Advanced Settings &gt; Battery Manager &gt; Protected apps</em> – check your app as <strong>Protected</strong></li>
+            <li><em>Apps &gt; This app &gt; Battery &gt; Power-intensive prompt</em> and enable <strong>Keep running after screen off</strong></li>
+        </ul>
+        ]]>
+    </string>
+    <string name="pf_meizu_on_screen">
+        <![CDATA[
+        <ul>
+            <li><em>Advanced Settings &gt; Battery Manager &gt; Protected apps</em> – check your app as <strong>Protected</strong></li>
+            <li><em>Apps &gt; This app &gt; Battery &gt; Power-intensive prompt</em> and enable <strong>Keep running after screen off</strong></li>
+        </ul>
+        ]]>
+    </string>
+    <string name="pf_meizu_advanced">
+        <![CDATA[
+            <p><em>Advanced Settings &gt; Battery manager &gt; Power plan</em> set to <strong>Performance</strong></p>
+        ]]>
+    </string>
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    SAMSUNG     -->
+    <string name="pf_samsung_7_or_recent_default">
+        <![CDATA[
+            You should add this app to <strong>Unmonitored apps</strong> list:
+            <ul>
+                <li>Scroll to the bottom of the screen that appears</li>
+                <li>Press <em>Unmonitored apps</em></li>
+                <li><strong>Add this app</strong></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_samsung_7_or_recent_on_screen">
+        <![CDATA[
+            You should add this app to <strong>Unmonitored apps</strong> list:
+            <ul>
+                <li>Scroll to the bottom of the screen</li>
+                <li>Press <em>Unmonitored apps</em></li>
+                <li><strong>Add this app</strong></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_samsung_7_or_recent_on_screen_from_settings">
+        <![CDATA[
+            You should add this app to <strong>Unmonitored apps</strong> list:
+            <ul>
+                <li>Go to <em>Device maintenance &gt; Battery</em>
+                <li>Scroll to the bottom of the screen</li>
+                <li>Press <em>Unmonitored apps</em></li>
+                <li><strong>Add this app</strong></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_samsung_pre_7_default">
+        <![CDATA[
+            You should <strong>disable</strong> <em>App optimization</em> for this app:
+            <p>Go to <em>Detail</em> under <em>App optimisation</em> and <strong>disable it</strong> for this app (<em>Turned off for</em>)</p>
+        ]]>
+    </string>
+    <string name="pf_samsung_pre_7_on_screen">
+        <![CDATA[
+            <p>Go to <em>Detail</em> under <em>App optimisation</em> and <strong>disable it</strong> for this app (<em>Turned off for</em>)</p>
+        ]]>
+    </string>
+    <string name="pf_samsung_pre_7_on_screen_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery</em></li>
+                <li>Go to <em>Detail</em> under <em>App optimisation</em></li>
+                <li><strong>Disable it</strong> for this app (<em>Turned off for</em>)</li>
+            </ul>
+        ]]>
+    </string>
+</resources>

@@ -1,0 +1,38 @@
+<resources>
+
+    <string name="pf_dialog_title">Warning!</string>
+
+    <string name="pf_default_intro_message">
+        <![CDATA[
+            <p>Your phone could be blocking this app.</p>
+            <p>Tap <strong>Fix it</strong> button and follow the instructions.</p>
+        ]]>
+    </string>
+
+    <string name="pf_fix_it_button">Fix it</string>
+    <string name="pf_not_now_button">Not now</string>
+    <string name="pf_got_it_button">Got it</string>
+
+    <!--    ADVANCED SOLUTION        -->
+    <string name="pf_advanced_header">Advanced solution</string>
+    <string name="pf_additional_header">Additional steps</string>
+    <string name="pf_content_description_additional_steps_expander">Tap and read additional steps</string>
+
+    <!--    DRAW OVER OTHER APPS DIALOG     -->
+    <string name="pf_enable_draw_over_dialog_positive_button">OK</string>
+    <string name="pf_enable_draw_over_dialog_negative_button">Not now</string>
+    <string name="pf_enable_draw_over_dialog_message">Let this app draw on screen instructions</string>
+    <string name="pf_enable_draw_over_dialog_enforce_message"><b>Let this app draw on screen instructions.</b>\n\nThe steps needed to solve the issue are for tech-savvy users.</string>
+
+
+
+    <!--    GENERIC Android 6.0+ doze mode      -->
+    <string name="pf_doze_default">
+        <![CDATA[
+        <ul>
+            <li>Select <em>All apps</em> from drop-down menu</li>
+            <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
+        </ul>
+        ]]>
+    </string>
+</resources>

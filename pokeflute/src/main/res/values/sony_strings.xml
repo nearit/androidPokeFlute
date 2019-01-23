@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_sony_default">
+        <![CDATA[
+            <p>Disable STAMINA mode for this app.
+            <br>Depending on your phone model you should:</p>
+            <p>Go to <em>Phone settings &gt; Power Management &gt; Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
+            <p>or</p>
+            <p><br>Go to <em>Phone settings &gt; Battery &gt; Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
+        ]]>
+    </string>
+    <string name="pf_sony_on_screen_from_settings">
+        <![CDATA[
+            <p>Depending on your phone model you should:</p>
+            <p>Go to <em>Power Management &gt; Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
+            <p>or</p>
+            <p><br>Go to <em>Battery &gt; Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
+        ]]>
+    </string>
+    <string name="pf_sony_on_screen">
+        <![CDATA[
+            <p>Depending on your phone model you should:</p>
+            <p>Go to <em>Stamina mode &gt; Apps active in standby</em> and <strong>enable this app</strong></p>
+            <p>or</p>
+            <p><br>Go to <em>Three dots top right corner &gt; Battery optimisation &gt; Apps</em> and <strong>disable optimisation for this app</strong></p>
+        ]]>
+    </string>
+</resources>

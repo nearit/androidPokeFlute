@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/pf_dialog_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:text="Warning!" />
+
+    <TextView
+        android:id="@+id/dialogIntroMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogTitle"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        tools:text="Your phone could be blocking this app." />
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/solutionText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialogIntroMessage"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="10dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp" />
+
+    <com.nearit.pokeflute.views.AdvancedSolution
+        android:id="@+id/advancedSolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/solutionText"
+        android:layout_marginTop="20dp"
+        android:visibility="gone" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/advancedSolution"
+        android:layout_marginTop="15dp"
+        android:paddingStart="5dp"
+        android:paddingLeft="5dp"
+        android:paddingEnd="5dp"
+        android:paddingRight="5dp">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/notNow"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toStartOf="@id/goFixIt"
+            android:layout_toLeftOf="@id/goFixIt"
+            android:text="@string/pf_not_now_button"
+            android:onClick="dismissActivity"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/goFixIt"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/pf_fix_it_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pf_oneplus_default">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery Optimization</em></li>
+                <li>Switch to the All apps list <strong>(Top menu) &gt; This app &gt; Don’t optimize</strong></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_oneplus_advanced_from_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery &gt; Battery Optimization &gt; Three dots top right corner &gt; Advanced optimization</em> or <em>Enhanced optimization</em></li>
+                <li><strong>Turn off</strong> <em>Deep battery optimization</em></li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_oneplus_advanced">
+        <![CDATA[
+            <p><strong>Turn off</strong> <em>Deep battery optimization</em></p>
+        ]]>
+    </string>
+    <string name="pf_oneplus_on_screen">
+        <![CDATA[
+            <ul>
+                <li>Select <em>All apps</em> from drop-down menu</li>
+                <li><strong>Disable</strong> for this app (<em>Don\'t optimise</em>)</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_oneplus_on_screen_from_battery_settings">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery Optimization</em></li>
+                <li>Switch to the All apps list <strong>(Top menu) &gt; This app &gt; Don’t optimize</strong></li>
+            </ul>
+        ]]>
+    </string>
+</resources>

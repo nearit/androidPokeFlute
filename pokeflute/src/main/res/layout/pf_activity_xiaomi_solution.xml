@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
+
+    <TextView
+        android:id="@+id/xiaomiDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/pf_dialog_title"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        tools:text="Warning!" />
+
+    <TextView
+        android:id="@+id/xiaomiDialogIntroMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiDialogTitle"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/pf_xiaomi_intro_message"
+        tools:text="Your phone could be blocking this app." />
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/xiaomiBatteryUsageSolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiDialogIntroMessage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        tools:text="battery usage solution" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/xiaomiBatteryUsageButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiBatteryUsageSolution"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/pf_fix_it_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/xiaomiAutoRunSolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiBatteryUsageButton"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/xiaomiAutoRunButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiAutoRunSolution"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/pf_fix_it_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+    <org.sufficientlysecure.htmltextview.HtmlTextView
+        android:id="@+id/xiaomiInternetDisablerSolution"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiAutoRunButton"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="20dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="20dp"
+        android:paddingRight="20dp"
+        tools:text="internet disable solution" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/xiaomiInternetDisablerButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiInternetDisablerSolution"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/pf_fix_it_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/xiaomiNotNowButton"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiaomiInternetDisablerButton"
+        android:layout_centerHorizontal="true"
+        android:text="@string/pf_not_now_button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
+
+</RelativeLayout>
