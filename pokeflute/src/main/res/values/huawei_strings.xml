@@ -15,12 +15,29 @@
             <p><strong>Turn on protection</strong> for this app<br>or<br><strong>set to <em>Manage manually</em></strong> and <strong>turn everything on</strong></p>
         ]]>
     </string>
+
+    <!--    Android >= 7.0 (EMUI >= 5.0)    -->
     <string name="pf_huawei_7_or_recent_default">
         <![CDATA[
             <ul>
                 <li>Go to <em>Battery &gt; Launch</em> (or <em>App Launch</em> or <em>Lock screen cleanup</em>)</li>
                 <li><strong>Disable</strong> <em>Manage automatically</em> for this app</li>
                 <li>Be sure that everything is <strong>turned on</strong> in the next screen</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_huawei_7_or_recent_lockscreen_cleanup">
+        <![CDATA[
+            <ul>
+                <li>Go to <em>Battery &gt; Lock screen cleanup</em></li>
+                <li>Be sure that the toggle is <strong>turned off</strong> (<em>Don\'t close</em>) for this app</li>
+            </ul>
+        ]]>
+    </string>
+    <string name="pf_huawei_7_or_recent_lockscreen_cleanup_on_screen">
+        <![CDATA[
+            <ul>
+                <li>Be sure that the toggle is <strong>turned off</strong> (<em>Don\'t close</em>) for this app</li>
             </ul>
         ]]>
     </string>

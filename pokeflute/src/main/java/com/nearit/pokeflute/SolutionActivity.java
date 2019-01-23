@@ -261,7 +261,11 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
         } else {
             if (solutionText != null && (!canDrawOver || drawPermissionCouldBeDenied)) {
                 if (!canStartActivity(this, HUAWEI_INTENT_EMUI_5_AND_LATER)) {
-                    solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_default));
+                    if (!canStartActivity(this, HUAWEI_INTENT_EMUI_PREV_TO_5)) {
+                        solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_default));
+                    } else {
+                        solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_lockscreen_cleanup));
+                    }
                 } else {
                     solutionText.setHtml(getStringRes(R.string.pf_huawei_7_or_recent_on_screen));
                 }
@@ -274,8 +278,13 @@ public class SolutionActivity extends AppCompatActivity implements DrawOverUtili
                         if (started) {
                             drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_on_screen);
                         } else {
-                            activityLauncher.goToSettings();
-                            drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_on_screen_from_settings);
+                            boolean fallbackStarted = activityLauncher.startHuawei7FallbackActivity();
+                            if (fallbackStarted) {
+                                drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_lockscreen_cleanup_on_screen);
+                            } else {
+                                activityLauncher.goToSettings();
+                                drawOverUtility.eventuallyDrawOverEverything(R.string.pf_huawei_7_or_recent_on_screen_from_settings);
+                            }
                         }
                     }
                 });

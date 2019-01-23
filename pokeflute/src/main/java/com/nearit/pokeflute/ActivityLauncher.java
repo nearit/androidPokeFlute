@@ -83,6 +83,10 @@ class ActivityLauncher {
         return eventuallyStartActivity(HUAWEI_INTENT_EMUI_PREV_TO_5);
     }
 
+    boolean startHuawei7FallbackActivity() {
+        return eventuallyStartActivity(HUAWEI_INTENT_EMUI_PREV_TO_5);
+    }
+
     boolean startXiaomiAutoRunActivity() {
         List<Intent> autoRunIntents = Arrays.asList(XIAOMI_AUTOSTART_INTENT, XIAOMI_AUTOSTART_INTENT_2);
         for (Intent intent : autoRunIntents) {

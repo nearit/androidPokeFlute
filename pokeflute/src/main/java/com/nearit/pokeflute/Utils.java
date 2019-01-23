@@ -168,6 +168,10 @@ public class Utils {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.N;
     }
 
+    static boolean preNougatIncluded() {
+        return Build.VERSION.SDK_INT <= Build.VERSION_CODES.N;
+    }
+
     static boolean lollipopOrRecent() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
