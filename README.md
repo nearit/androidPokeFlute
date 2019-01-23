@@ -60,8 +60,9 @@ Manufacturer | Device name   | Device code | Android version | Notes
 ------------ | ------------- | ----------- | --------------- | ---------
 Huawei       |  Mate S       |   CRR-L09   |    5.1.1        |  Protect App
 Huawei       |  Honor 8      |   FRD-L09   |    6.0          |  Protect App
-Huawei       |  Mate 10 pro  |   BLA-L09   |    8.0.0        |  Lock screen cleanup
-Huawei       |  Mate 10 lite |   RNE-L21   |    8.0.0        |  Lock screen cleanup
+Huawei       |  Mate 10 pro  |   BLA-L09   |    8.0.0        |  App launch
+Huawei       |  Mate 10 lite |   RNE-L21   |    8.0.0        |  App launch
+Huawei       |  P8 lite 2017 |   PRA-LX1   |    7.0          |  Lock screen cleanup
 Lenovo       |  K6           |   K33A48    |    7.0          |  Background app management
 Motorola     |  Moto x4      |   XT1900-7  |    9.0          |  Android doze
 Nokia        |  7 Plus       |   7 plus    |    9.0          |  Evenwell Power saver
