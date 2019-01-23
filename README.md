@@ -4,6 +4,22 @@ Here at [NearIT](https://nearit.com) we constantly pay attention to UX, user per
 Mobile users can experience some issues caused by aggressive power management and app blocking policies imposed by smartphone vendors.
 Inspired by [dontkillmyapp.com](https://dontkillmyapp.com), we want to provide an Android library that checks and handles those strange scenarios by asking the user to whitelist or protect an app.
 
+## Installation
+
+```groovy
+implementation 'it.near.sdk:pokeflute:prealpha-1'
+```
+
+If you are experiencing any issue with resource merging or support-library compatibility, try clean/build project or:
+
+```groovy
+implementation('it.near.sdk:pokeflute:prealpha-1') {
+    exclude group: 'com.android.support'
+}
+``` 
+
+## Usage
+
 We provide these useful methods:
 
 ```java
