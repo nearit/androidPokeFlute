@@ -62,29 +62,29 @@ public class Utils {
     /**
      * Known app blockers / power managers intents.
      */
-    static final Intent HUAWEI_INTENT_EMUI_5_AND_LATER = new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity"));
-    static final Intent HUAWEI_INTENT_EMUI_PREV_TO_5 = new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.optimize.process.ProtectActivity"));
-    static final Intent OPPO_INTENT_1 = new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.permission.startup.StartupAppListActivity"));
-    static final Intent OPPO_INTENT_2 = new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.startupapp.StartupAppListActivity"));
-    static final Intent OPPO_INTENT_3 = new Intent().setComponent(new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity"));
-    static final Intent VIVO_INTENT_1 = new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity"));
-    static final Intent VIVO_INTENT_2 = new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager"));
-    static final Intent VIVO_INTENT_3 = new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity"));
-    static final Intent ASUS_INTENT = new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(android.net.Uri.parse("mobilemanager://function/entry/AutoStart"));
-    static final Intent XIAOMI_AUTOSTART_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity"));
-    static final Intent XIAOMI_AUTOSTART_INTENT_2 = new Intent("miui.intent.action.OP_AUTO_START").addCategory(Intent.CATEGORY_DEFAULT);
-    static final Intent XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT = new Intent("miui.intent.action.POWER_HIDE_MODE_APP_LIST").addCategory(Intent.CATEGORY_DEFAULT);
-    static final Intent XIAOMI_INTERNET_DISABLER_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.powercenter.PowerSettings"));
-    static final Intent SAMSUNG_INTENT_7_AND_LATER = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity"));
-    static final Intent SAMSUNG_INTENT_LOLLIPOP = new Intent().setComponent(new ComponentName("com.samsung.android.sm", "com.samsung.android.sm.ui.battery.BatteryActivity"));
-    static final Intent LENOVO_INTENT = new Intent().setComponent(new ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.PowerSettingActivity"));
-    static final Intent ONEPLUS_BATTERY_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeSwitchActivity"));
+    static final Intent HUAWEI_INTENT_EMUI_5_AND_LATER = new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.appcontrol.activity.StartupAppControlActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent HUAWEI_INTENT_EMUI_PREV_TO_5 = new Intent().setComponent(new ComponentName("com.huawei.systemmanager", "com.huawei.systemmanager.optimize.process.ProtectActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent OPPO_INTENT_1 = new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.permission.startup.StartupAppListActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent OPPO_INTENT_2 = new Intent().setComponent(new ComponentName("com.coloros.safecenter", "com.coloros.safecenter.startupapp.StartupAppListActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent OPPO_INTENT_3 = new Intent().setComponent(new ComponentName("com.oppo.safe", "com.oppo.safe.permission.startup.StartupAppListActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent VIVO_INTENT_1 = new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent VIVO_INTENT_2 = new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent VIVO_INTENT_3 = new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent ASUS_INTENT = new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(android.net.Uri.parse("mobilemanager://function/entry/AutoStart")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent XIAOMI_AUTOSTART_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.permcenter.autostart.AutoStartManagementActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent XIAOMI_AUTOSTART_INTENT_2 = new Intent("miui.intent.action.OP_AUTO_START").addCategory(Intent.CATEGORY_DEFAULT).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent XIAOMI_BATTERY_USAGE_RESTRICTION_INTENT = new Intent("miui.intent.action.POWER_HIDE_MODE_APP_LIST").addCategory(Intent.CATEGORY_DEFAULT).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent XIAOMI_INTERNET_DISABLER_INTENT = new Intent().setComponent(new ComponentName("com.miui.securitycenter", "com.miui.powercenter.PowerSettings")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent SAMSUNG_INTENT_7_AND_LATER = new Intent().setComponent(new ComponentName("com.samsung.android.lool", "com.samsung.android.sm.ui.battery.BatteryActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent SAMSUNG_INTENT_LOLLIPOP = new Intent().setComponent(new ComponentName("com.samsung.android.sm", "com.samsung.android.sm.ui.battery.BatteryActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent LENOVO_INTENT = new Intent().setComponent(new ComponentName("com.lenovo.powersetting", "com.lenovo.powersetting.PowerSettingActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    static final Intent ONEPLUS_BATTERY_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeSwitchActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     @SuppressWarnings("WeakerAccess")
-    static final Intent HTC_BOOST_APP_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity"));
+    static final Intent HTC_BOOST_APP_INTENT = new Intent().setComponent(new ComponentName("com.htc.pitroad", "com.htc.pitroad.landingpage.activity.LandingPageActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     @SuppressWarnings("WeakerAccess")
-    static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3"));
+    static final Intent NOKIA_INTENT = new Intent().setComponent(new ComponentName("com.evenwell.powersaving.g3", "com.evenwell.powersaving.g3.exception.PowerSaverExceptionActivity3")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     @SuppressWarnings("WeakerAccess")
-    static final Intent ONEPLUS_DEEP_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeAppListActivity"));
+    static final Intent ONEPLUS_DEEP_OPTIMIZATION_INTENT = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$BgOptimizeAppListActivity")).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
     @SuppressWarnings("WeakerAccess")
     public static final List<Intent> POWERMANAGER_INTENTS = Arrays.asList(

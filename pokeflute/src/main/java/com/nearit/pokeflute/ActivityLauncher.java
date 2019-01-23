@@ -39,10 +39,10 @@ class ActivityLauncher {
     final static int POWER_MANAGEMENT_REQUEST_CODE = 555;
     private final Activity activity;
 
-    private final static Intent goToSettings = new Intent(android.provider.Settings.ACTION_SETTINGS);
-    private final static Intent goToPowerManager = new Intent(Intent.ACTION_POWER_USAGE_SUMMARY);
+    private final static Intent goToSettings = new Intent(android.provider.Settings.ACTION_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+    private final static Intent goToPowerManager = new Intent(Intent.ACTION_POWER_USAGE_SUMMARY).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
     @RequiresApi(api = Build.VERSION_CODES.M)
-    private final static Intent goToBatteryOptimization = new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    private final static Intent goToBatteryOptimization = new Intent().setAction(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
     ActivityLauncher(@NonNull Activity activity) {
         this.activity = activity;
