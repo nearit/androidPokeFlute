@@ -41,7 +41,7 @@ startActivity(SolutionActivity.createIntent(this));
 
 ![history list](images/dozeFix_3.gif)
 
-## Know issues
+## Known issues
 
 * Missing Oppo instructions.
 * Missing Vivo instructions.
